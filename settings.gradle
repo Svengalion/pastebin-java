@@ -1,0 +1,6 @@
+rootProject.name = 'pastebin-java'
+include 'hash'
+include 'paste'
+include 'user'
+include 'common'
+

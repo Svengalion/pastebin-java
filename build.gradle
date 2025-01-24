@@ -1,18 +1,22 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '3.4.1'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
-
-group = 'com.svengali'
-version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+bootJar {
+    mainClass = 'common/src/main/java/com/svengali/Application.java'
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.liquibase:liquibase-core'
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

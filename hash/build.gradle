@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '3.4.1'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'com.svengali'
@@ -9,10 +11,29 @@ repositories {
     mavenCentral()
 }
 
+bootJar {
+    mainClass = 'hash/src/main/java/com/svengali/HashApplication.java'
+}
+
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.liquibase:liquibase-core:4.15.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.liquibase:liquibase-core'
+
+    implementation 'org.modelmapper:modelmapper:3.2.0'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.hibernate:hibernate-jpamodelgen:6.4.4.Final'
+
+    implementation project(':common')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 test {

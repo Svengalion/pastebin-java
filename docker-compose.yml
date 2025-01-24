@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+
+  postgres-hash:
+    env_file:
+      - .env
+    image: postgres:13
+    container_name: hash_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_HASH_DB}
+      POSTGRES_USER: ${POSTGRES_HASH_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_HASH_PASSWORD}
+    ports:
+      - "${POSTGRES_HASH_PORT}:5432"
+    volumes:
+      - postgres-hash-data:/var/lib/postgresql/data
+
+  postgres-paste:
+    env_file:
+      - .env
+    image: postgres:13
+    container_name: paste_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_PASTE_DB}
+      POSTGRES_USER: ${POSTGRES_PASTE_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASTE_PASSWORD}
+    ports:
+      - "${POSTGRES_PASTE_PORT}:5432"
+    volumes:
+      - postgres-paste-data:/var/lib/postgresql/data
+
+  redis:
+    env_file:
+      - .env
+    image: redis:6
+    container_name: redis
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - redis-data:/data
+
+  pastebin:
+    env_file:
+      - .env
+    build: .
+    container_name: pastebin
+    ports:
+      - "${PASTBIN_PORT}:8080"
+    depends_on:
+      - postgres-hash
+      - postgres-paste
+      - redis
+    environment:
+      SPRING_DATASOURCE_HASH_DATASOURCE_URL: ${HASH_DATASOURCE_URL}
+      SPRING_DATASOURCE_HASH_DATASOURCE_USERNAME: ${POSTGRES_HASH_USER}
+      SPRING_DATASOURCE_HASH_DATASOURCE_PASSWORD: ${POSTGRES_HASH_PASSWORD}
+      SPRING_DATASOURCE_PASTE_DATASOURCE_URL: ${PASTE_DATASOURCE_URL}
+      SPRING_DATASOURCE_PASTE_DATASOURCE_USERNAME: ${POSTGRES_PASTE_USER}
+      SPRING_DATASOURCE_PASTE_DATASOURCE_PASSWORD: ${POSTGRES_PASTE_PASSWORD}
+      SPRING_REDIS_HOST: ${REDIS_HOST}
+      SPRING_REDIS_PORT: ${REDIS_PORT}
+      # Добавьте другие переменные окружения по необходимости
+
+volumes:
+  postgres-hash-data:
+  postgres-paste-data:
+  redis-data:

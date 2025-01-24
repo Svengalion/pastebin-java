@@ -3,4 +3,5 @@ include 'hash'
 include 'paste'
 include 'user'
 include 'common'
+include 'mappers'
 

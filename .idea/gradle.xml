@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/hash" />
+            <option value="$PROJECT_DIR$/mappers" />
             <option value="$PROJECT_DIR$/paste" />
             <option value="$PROJECT_DIR$/user" />
           </set>

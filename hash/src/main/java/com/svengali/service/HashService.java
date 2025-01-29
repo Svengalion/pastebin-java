@@ -1,14 +1,12 @@
 package com.svengali.service;
 
-import com.svengali.dto.HashCreateOrUpdateDTO;
-import com.svengali.dto.HashDTO;
-import com.svengali.dto.HashDeleteDTO;
-import com.svengali.dto.HashSearchDTO;
+import com.svengali.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface HashService {
-    HashDTO createOrUpdate(HashCreateOrUpdateDTO dto);
+    HashDTO create(HashCreateDTO dto);
+    HashDTO update(HashUpdateDTO dto);
     void delete(HashDeleteDTO hash);
     Page<HashDTO> search(HashSearchDTO dto, Pageable pageable);
 }

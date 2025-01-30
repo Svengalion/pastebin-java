@@ -25,6 +25,10 @@ public class HashServiceImplementation implements HashService {
 
     @Override
     public HashDTO create() {
+        HashDTO dto = hashGenerator.generate();
+        while (search(modelMapper.map(dto, HashSearchDTO.class), Pageable.unpaged()) != null) {
+            dto = hashGenerator.generate();
+        }
         return modelMapper.map(repository.save(modelMapper.
                 map(hashGenerator.generate(), Hash.class)), HashDTO.class);
     }

@@ -12,10 +12,11 @@ import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
-public class HashBuisness implements HashService {
+public class HashServiceImplementation implements HashService {
 
     private final HashRepository repository;
     private final ModelMapper modelMapper;
+    private final HashGenerator hashGenerator;
 
     @Override
     public HashDTO update(HashUpdateDTO dto) {
@@ -23,8 +24,9 @@ public class HashBuisness implements HashService {
     }
 
     @Override
-    public HashDTO create(HashCreateDTO dto) {
-        return modelMapper.map(repository.save(modelMapper.map(dto, Hash.class)), HashDTO.class);
+    public HashDTO create() {
+        return modelMapper.map(repository.save(modelMapper.
+                map(hashGenerator.generate(), Hash.class)), HashDTO.class);
     }
 
     @Override

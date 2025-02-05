@@ -19,9 +19,9 @@ public class PostgresContainer implements ApplicationContextInitializer<Configur
                 .load();
 
         postgresContainer = new PostgreSQLContainer<>(POSTGRES_IMAGE)
-                .withDatabaseName(dotenv.get("POSTGRES_HASH_DB"))
-                .withUsername(dotenv.get("POSTGRES_HASH_USER"))
-                .withPassword(dotenv.get("POSTGRES_HASH_PASSWORD"));
+                .withDatabaseName(("POSTGRES_HASH_DB"))
+                .withUsername(("POSTGRES_HASH_USER"))
+                .withPassword(("POSTGRES_HASH_PASSWORD"));
         postgresContainer.start();
     }
 

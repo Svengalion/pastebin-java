@@ -4,7 +4,7 @@ services:
 
   postgres-hash:
     env_file:
-      - .env
+      - common/.env
     image: postgres:13
     container_name: hash_db
     environment:
@@ -18,7 +18,7 @@ services:
 
   postgres-paste:
     env_file:
-      - .env
+      - common/.env
     image: postgres:13
     container_name: paste_db
     environment:
@@ -32,7 +32,7 @@ services:
 
   redis:
     env_file:
-      - .env
+      - common/.env
     image: redis:6
     container_name: redis
     ports:
@@ -42,7 +42,7 @@ services:
 
   pastebin:
     env_file:
-      - .env
+      - common/.env
     build: .
     container_name: pastebin
     ports:

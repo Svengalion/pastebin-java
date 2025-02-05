@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 
 @Jacksonized
-@NoArgsConstructor(force = true)
+@Builder
+@AllArgsConstructor
 public class HashDeleteDTO {
     public final String hash;
 }

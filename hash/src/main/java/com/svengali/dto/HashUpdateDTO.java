@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 
 @Jacksonized
-@NoArgsConstructor(force = true)
+@Builder
+@AllArgsConstructor
 public class HashUpdateDTO {
     public final String hash;
     public final Boolean isUsed;

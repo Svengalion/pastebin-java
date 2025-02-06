@@ -2,7 +2,7 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY common/build/libs/common-0.0.1-SNAPSHOT.jar app.jar
+COPY build/libs/pastebin-java.jar app.jar
 
 EXPOSE 8080
 
